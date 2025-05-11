@@ -1,0 +1,1 @@
+The database schema and sql scripts to create the tables according the entities
