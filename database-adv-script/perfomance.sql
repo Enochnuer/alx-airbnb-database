@@ -1,9 +1,6 @@
--- Initial query to retrieve all bookings with user, property, and payment details
 
-CREATE INDEX IF NOT EXISTS idx_bookings_user_id ON bookings(user_id);
-
-CREATE INDEX IF NOT EXISTS idx_bookings_property_id ON bookings(property_id);
-CREATE INDEX IF NOT EXISTS idx_payments_booking_id ON payments(booking_id);
+-- EXPLAIN ANALYZE to check query performance
+EXPLAIN ANALYZE
 SELECT 
     b.id AS booking_id,
     b.booking_date,
@@ -21,4 +18,5 @@ FROM
     bookings b
 JOIN users u ON b.user_id = u.id
 JOIN properties p ON b.property_id = p.id
-LEFT JOIN payments pay ON b.id = pay.booking_id;
+LEFT JOIN payments pay ON b.id = pay.booking_id
+WHERE b.status = 'confirmed';
